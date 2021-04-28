@@ -4,8 +4,6 @@ require 'dotenv/load'
 require "net/http"
 require "json"
 
-require "byebug"
-
 def token
     ENV['LINKEDIN_TOKEN']
 end
@@ -28,7 +26,7 @@ def get_linkedin_activities
     response["elements"].each do |element|
         activities << {
             "id" => element["activity"],
-            "message_highlight" => element["text"]["text"][0, 20]
+            "message_highlight" => element["text"]["text"][0, 40]
         }    
     end
 
@@ -39,9 +37,7 @@ def comments(activities)
     activities.each do |activity|
         comments = get_commenters(activity["id"])
 
-        next if comments.nil? || comments.empty?
-
-        process_comments(comments, activity["message_highlight"])
+        process_comments(comments["elements"], activity["message_highlight"]) unless comments["elements"].nil? || comments["elements"].empty?
     end
 end
 
@@ -62,8 +58,26 @@ end
 
 def process_comments(comments, message_highlight)
     comments.each do |comment|
-        activity = construct_activity(comment, message_highlight)
+        activity_params = construct_activity(comment, message_highlight)
+        send_to_orbit(activity_params)
     end
+end
+
+def send_to_orbit(activity_params)
+    url = URI("https://app.orbit.love/api/v1/#{ENV['ORBIT_WORKSPACE_ID']}/activities")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    req = Net::HTTP::Post.new(url)
+    req["Accept"] = "application/json"
+    req["Content-Type"] = "application/json"
+    req["Authorization"] = "Bearer #{ENV['ORBIT_API_KEY']}"
+
+    req.body = activity_params.to_json
+
+    response = http.request(req)
+
+    JSON.parse(response.body)
 end
 
 def construct_activity(comment, message_highlight)
@@ -71,13 +85,16 @@ def construct_activity(comment, message_highlight)
         "activity": {
             "activity_type": "linkedin:comment",
             "title": "New comment on LinkedIn Post: #{message_highlight}",
-            "description": comment["elements"][0]["message"]["text"],
-            "occurred_at": Time.at(comment["elements"][0]["created"]["time"] / 1000)
+            "description": comment["message"]["text"],
+            "occurred_at": Time.at(comment["created"]["time"] / 1000),
+            "member": {
+                "name": "#{comment["actor~"]["localizedFirstName"]} #{comment["actor~"]["localizedLastName"]}"
+            }
         },
         "identity": {
             "source": "linkedin",
-            "name": "#{comment["elements"][0]["actor"]["localizedFirstName"]} #{comment["elements"][0]["actor"]["localizedLastName"]}",
-            "uid": comment["elements"][0]["actor"]["actor"]
+            "name": "#{comment["actor~"]["localizedFirstName"]} #{comment["actor~"]["localizedLastName"]}",
+            "uid": comment["actor"]
         }
     }
 end
