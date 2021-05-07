@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+require 'optparse'
+
+check_comments = false
+
+options = {}
+choices = OptionParser.new do |opts|
+  opts.banner = "Usage: linkedin_orbit --check-comments"
+  opts.on("-h", "--help", "Prints help instructions") do
+    puts opts
+    exit
+  end
+  opts.on("--check-comments", "Check for new LinkedIn comments") do
+    check_comments = true
+  end
+end.parse!
+
+$LOAD_PATH.unshift(File.expand_path('../lib/dev_orbit', __dir__))
+
+require_relative '../lib/linkedin_orbit'
+require_relative '../scripts/check_comments'
+
+if check_comments
+  puts "Checking for new LinkedIn comments and posting them to your Orbit workspace..."
+  ARGV[0] = 'render'
+  LinkedinOrbit::Scripts::CheckComments.start(ARGV)
+end
