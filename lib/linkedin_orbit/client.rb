@@ -37,13 +37,12 @@ require "dotenv/load"
 #
 module LinkedinOrbit
   class Client
-    attr_accessor :orbit_api_key, :orbit_workspace, :linkedin_client_id, :linkedin_client_secret, :linkedin_organization
+    attr_accessor :orbit_api_key, :orbit_workspace, :linkedin_organization
+    attr_reader :linkedin_token
 
     def initialize(params = {})
       @orbit_api_key = params.fetch(:orbit_api_key, ENV["ORBIT_API_KEY"])
       @orbit_workspace = params.fetch(:orbit_workspace, ENV["ORBIT_WORKSPACE_ID"])
-      @linkedin_client_id = params.fetch(:linkedin_client_id, ENV["LINKEDIN_CLIENT_ID"])
-      @linkedin_client_secret = params.fetch(:linkedin_client_secret, ENV["LINKEDIN_CLIENT_SECRET"])
       @linkedin_token = token
       @linkedin_organization = params.fetch(:linkedin_organization, ENV["LINKEDIN_ORGANIZATION"])
     end

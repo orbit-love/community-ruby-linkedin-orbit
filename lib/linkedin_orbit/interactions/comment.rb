@@ -40,6 +40,7 @@ module LinkedinOrbit
             title: "Commented on LinkedIn Post",
             description: construct_description,
             occurred_at: Time.at(@comment["created"]["time"] / 1000),
+            key: @comment["id"],
             member: {
               name: name
             }
