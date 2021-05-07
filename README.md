@@ -9,10 +9,12 @@ This is a Ruby app that can be used to integrate LinkedIn post comments into you
 |<p align="left">:sparkles:</p> This is a *community project*. The Orbit team does its best to maintain it and keep it up to date with any recent API changes.<br/><br/>We welcome community contributions to make sure that it stays current. <p align="right">:sparkles:</p>|
 |-----------------------------------------|
 
+<hr />
+
 ## Installation
 
-*Add instructions here*
-
+| **Are you setting up this integration for the first time? Please read the [first time setup]() guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.**
+|-----------------------------------------|
 ## Usage
 
 *Add instructions here*

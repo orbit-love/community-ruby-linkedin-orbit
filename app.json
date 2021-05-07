@@ -1,0 +1,19 @@
+
+{
+    "name": "LinkedIn Authentication One-Time Use App",
+    "description": "Authenticate to LinkedIn to receive your LinkedIn browser code",
+    "keywords": ["rails", "ruby", "orbit", "linkedin"],
+    "scripts": {
+      "postdeploy": "cd auth_app && bundle exec rails s"
+    },
+    "env": {
+      "LINKEDIN_CLIENT_ID": {
+        "description": "Please provide your LinkedIn Client ID",
+        "value": "client ID goes here"
+      },
+      "LINKEDIN_CLIENT_SECRET": {
+        "description": "Please provide your LinkedIn Client Secret",
+        "value": "client secret goes here"
+      }
+    }
+  }
