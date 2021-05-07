@@ -2,6 +2,8 @@
 {
     "name": "LinkedIn Authentication One-Time Use App",
     "description": "Authenticate to LinkedIn to receive your LinkedIn browser code",
+    "repository": "https://github.com/orbit-love/community-ruby-linkedin-orbit",
+    "logo": "https://raw.githubusercontent.com/orbit-love/orbit-web/main/src/assets/images/og_image.png",
     "keywords": ["rails", "ruby", "orbit", "linkedin"],
     "scripts": {
       "postdeploy": "bundle exec rails s"

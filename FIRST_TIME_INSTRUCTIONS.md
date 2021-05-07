@@ -53,7 +53,8 @@ The `linkedin_orbit` integration includes an authentication application to facil
 
 Click on the following button to begin deploying the authentication app to Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/orbit-love/community-ruby-linkedin-orbit)
 
 You will need to supply your LinkedIn Client ID and LinkedIn Client Secret as part of the deployment process. These are not stored by Orbit or inside this repository. They are only stored by Heroku as part of your Heroku account.
+
 
