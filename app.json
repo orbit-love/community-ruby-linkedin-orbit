@@ -15,5 +15,10 @@
         "description": "Please provide your LinkedIn Client Secret",
         "value": "client secret goes here"
       }
-    }
+    },
+    "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-inline.git"
+        }
+    ]
   }
