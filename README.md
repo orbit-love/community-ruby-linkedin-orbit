@@ -1,7 +1,7 @@
 # LinkedIn to Orbit Workspace Ruby App
 
-![Build Status](https://github.com/bencgreenberg/dev_orbit/workflows/CI/badge.svg)
-[![Gem Version](https://badge.fury.io/rb/dev_orbit.svg)](https://badge.fury.io/rb/dev_orbit)
+![Build Status](https://github.com/orbit-love/community-ruby-linkedin-orbit/workflows/CI/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/linkedin_orbit.svg)](https://badge.fury.io/rb/dev_orbit)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
 
 This is a Ruby app that can be used to integrate LinkedIn post comments into your organization's Orbit workspace.
