@@ -3,8 +3,8 @@ require_relative "lib/linkedin_orbit/version"
 Gem::Specification.new do |spec|
     spec.name                   = "linkedin_orbit"
     spec.version                = LinkedinOrbit::VERSION
-    spec.authors                = ["Orbit"]
-    spec.email                  = ["developers@orbit.love"]
+    spec.authors                = ["Orbit DevRel", "Ben Greenberg"]
+    spec.email                  = ["devrel@orbit.love"]
 
     spec.summary                = "Integrate LinkedIn interactions into Orbit"
     spec.description            = "This gem brings in LinkedIn comments to your Orbit workspace"
@@ -27,5 +27,8 @@ Gem::Specification.new do |spec|
     spec.add_dependency         = "http", "~> 4.4"
     spec.add_dependency         = "json", "~> 2.5"
     spec.add_dependency         = "zeitwerk", "~> 2.4"
-    spec.add_dependency         = "linkedin"
+    spec.add_dependency         = "thor", "~> 1.1"
+    spec.add_dependency         = "linkedin", "~> 1.1"
+    spec.add_development_dependency = "rspec", "~> 3.4"
+    spec.add_development_dependency = "webmock", "~> 3.12"
 end
