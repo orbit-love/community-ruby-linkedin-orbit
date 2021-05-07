@@ -51,7 +51,7 @@ LinkedIn uses OAuth 2.0 as its authentication format, and as such, you need to a
 
 The `linkedin_orbit` integration includes an authentication application to facilitate this process for you. It requires that you have a [Heroku](https://www.heroku.com/) account. It is free to set up a Heroku account, and the one-time authentication app, is fine to run inside the free tier of the platform.
 
-Click on the following button to begin deploying the authentication app to Heroku:
+Click on the _Deploy to Heroku_ button below to begin deploying the authentication app to Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/orbit-love/linkedin-auth-app)
 
