@@ -13,7 +13,7 @@ This is a Ruby app that can be used to integrate LinkedIn post comments into you
 
 ## Installation
 
-| **Are you setting up this integration for the first time? Please read the [first time setup]() guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.**
+| **Are you setting up this integration for the first time? Please read the [first time setup](https://github.com/orbit-love/community-ruby-linkedin-orbit/blob/main/FIRST_TIME_INSTRUCTIONS.md) guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.**
 |-----------------------------------------|
 ## Usage
 
