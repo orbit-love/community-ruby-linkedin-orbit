@@ -4,7 +4,7 @@
     "description": "Authenticate to LinkedIn to receive your LinkedIn browser code",
     "keywords": ["rails", "ruby", "orbit", "linkedin"],
     "scripts": {
-      "postdeploy": "cd auth_app && bundle exec rails s"
+      "postdeploy": "bundle exec rails s"
     },
     "env": {
       "LINKEDIN_CLIENT_ID": {
