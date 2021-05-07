@@ -13,8 +13,24 @@ This is a Ruby app that can be used to integrate LinkedIn post comments into you
 
 ## Installation
 
-| **Are you setting up this integration for the first time? Please read the [first time setup]() guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.**
+| **Are you setting up this integration for the first time?**
+
+Please read the [first time setup]() guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.
 |-----------------------------------------|
+
+### As a Standalone App
+
+To install this integration in a standalone app, add the gem to your `Gemfile`:
+
+```ruby
+gem "linkedin_orbit"
+```
+
+Then, run `bundle install` from your terminal.
+
+### With GitHub Actions
+
+This integration can be run as a daily scheduled activity within GitHub Actions! To install this integration with your GitHub account, follow the instructions in the [Orbit GitHub Actions Guide](https://github.com/orbit-love/github-actions-templates).
 ## Usage
 
 *Add instructions here*
