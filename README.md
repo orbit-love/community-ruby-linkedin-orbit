@@ -33,7 +33,11 @@ Then, run `bundle install` from your terminal.
 This integration can be run as a daily scheduled activity within GitHub Actions! To install this integration with your GitHub account, follow the instructions in the [Orbit GitHub Actions Guide](https://github.com/orbit-love/github-actions-templates).
 ## Usage
 
-*Add instructions here*
+### CLI
+
+### Standalone Client
+
+### GitHub Actions
 
 ## Contributing
 
