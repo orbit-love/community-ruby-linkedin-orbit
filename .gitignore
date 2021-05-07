@@ -1,2 +1,4 @@
 .env
 .byebug_history
+.DS_Store
+readme_images/.DS_Store
