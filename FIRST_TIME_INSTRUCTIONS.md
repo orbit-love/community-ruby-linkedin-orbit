@@ -71,7 +71,7 @@ You will see a link appear called "+ Add redirect URL". Click on that link. In t
 
 Now, return back to your browser window with your Heroku app running. Click on the "LinkedIn" link on the app. Follow the prompts by LinkedIn to authorize your LinkedIn Developer application. When you are finished, you will be redirected back to your Heroku app and you will see a LinkedIn code. This code is very important. The code you see will be the credential used to authenticate to LinkedIn for the duration of your use of the LinkedIn Orbit community integration.
 
-The last item you need to do in this first time setup is to add the LinkedIn code you created into the LinkedIn Orbit community integration credentials, either in the context of a standalone app or in the context of running it as a GitHub Action.
+The last step you need to complete in this first time setup is to add the LinkedIn code you created into the LinkedIn Orbit community integration credentials, either in the context of a standalone app or in the context of running it as a GitHub Action.
 
 ## Add the LinkedIn Code to the LinkedIn Orbit Community Integration
 ### Within GitHub Actions
