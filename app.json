@@ -19,9 +19,6 @@
     },
     "buildpacks": [
         {
-            "url": "https://github.com/heroku/heroku-buildpack-inline.git"
-        },
-        {
             "url": "heroku/ruby"
         }
     ]
