@@ -8,7 +8,7 @@ The first thing you must do is create a LinkedIn Developers app.
 
 Navigate to the [LinkedIn Developers](https://www.linkedin.com/developers/) website and click the "Create App" button.
 
-![Create LinkedIn App Button](readme_images/create_app_button.png)
+![Create LinkedIn App Button](../readme_images/create_app_button.png)
 
 This will direct you to a short form where LinkedIn will ask you for a few pieces of information:
 
@@ -27,17 +27,17 @@ LinkedIn has many different types of APIs and many different types of access lev
 
 From within your LinkedIn Developers dashboard, navigate to the "Products" page and submit the access request form.
 
-![Marketing Developer Platform Request](readme_images/marketing_platform_request_access.png)
+![Marketing Developer Platform Request](../readme_images/marketing_platform_request_access.png)
 
 This will take another few days for LinkedIn to verify and confirm this request. Once it is done, you will see the Marketing Developer Platform in your list of "Added Products" like shown in the next screenshot.
 
-![LinkedIn Developer Products List](readme_images/products_list.png)
+![LinkedIn Developer Products List](../readme_images/products_list.png)
 
 ## LinkedIn API Credentials
 
 You will need your LinkedIn API credentials to move forward. You can copy your LinkedIn credentials, which are your Client ID and Client Secret from the "Auth" section in the LinkedIn Developers dashboard.
 
-![LinkedIn Client Credentials](readme_images/client_credentials.png)
+![LinkedIn Client Credentials](../readme_images/client_credentials.png)
 
 Make sure to save those somewhere safe and where you can access them as we will need them again shortly.
 
@@ -59,13 +59,13 @@ You will need to supply your LinkedIn Client ID and LinkedIn Client Secret as pa
 
 Once the app has been deployed on Heroku, click on the "View" button as shown below.
 
-![Heroku View Button](readme_images/heroku_view_app_button.png)
+![Heroku View Button](../readme_images/heroku_view_app_button.png)
 
 This will load a new browser window with the app rendered.
 
 Copy the URL of the Heroku app in your browser address bar and return to the LinkedIn Developers dashboard. In the LinkedIn Developers dashboard click on "Auth" from the navigation menu" and then click on the pencil icon in the "Authorized redirect URLs for your app" section of the page, as shown below.
 
-![LinkedIn OAuth Redirect URLS](readme_images/linkedin_oauth_redirects.png)
+![LinkedIn OAuth Redirect URLS](../readme_images/linkedin_oauth_redirects.png)
 
 You will see a link appear called "+ Add redirect URL". Click on that link. In the text box that appears above it enter your Heroku app URL with "/auth/linkedin/callback" appended at the end. For example, if your Heroku URL was "https://example-heroku-app-url.herokuapp.com" then the full address you need to enter would be: "https://example-heroku-app-url.herokuapp.com/auth/linkedin/callback". When you are finished, click on the "Update" button.
 

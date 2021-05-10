@@ -9,13 +9,23 @@ This is a Ruby app that can be used to integrate LinkedIn post comments into you
 |<p align="left">:sparkles:</p> This is a *community project*. The Orbit team does its best to maintain it and keep it up to date with any recent API changes.<br/><br/>We welcome community contributions to make sure that it stays current. <p align="right">:sparkles:</p>|
 |-----------------------------------------|
 
-<hr />
+![There are three ways to use this integration. Install package - build and run your own applications. Run the CLI - run on-demand directly from your terminal. Schedule an automation with GitHub - get started in minutes - no coding required](readme_images/ways-to-use.png)
+## First Time Setup
 
-## Installation
+To set up this integration you will need to follow some steps required by LinkedIn. Please follow the [First Time Setup guide](docs/FIRST_TIME_INSTRUCTIONS.md) for step-by-step instructions.
 
-| **Are you setting up this integration for the first time? Please read the [first time setup](https://github.com/orbit-love/community-ruby-linkedin-orbit/blob/main/FIRST_TIME_INSTRUCTIONS.md) guide before proceeding. LinkedIn requires a very specific authentication procedure, and it is required, to successfully use this integration.**
+## Application Credentials
 
-### As a Standalone App
+The application requires the following environment variables:
+
+| Variable | Description | More Info
+|---|---|--|
+| `LINKEDIN_CODE` | LinkedIn Browser Refresh Code | Follow the [First Time Setup guide](docs/FIRST_TIME_INSTRUCTIONS.md) to obtain the code
+| `LINKEDIN_ORGANIZATION` | LinkedIn Organization Page ID | Format: `urn:li:organization:#{id}`. ID is the set of numbers in LinkedIn page URL, i.e. `https://www.linkedin.com/company/28866695`, the ID is `28866695`.
+| `ORBIT_API_KEY` | API key for Orbit | Found in `Account Settings` in your Orbit workspace
+| `ORBIT_WORKSPACE_ID` | ID for your Orbit workspace | Last part of the Orbit workspace URL, i.e. `https://app.orbit.love/my-workspace`, the ID is `my-workspace`
+
+## Package Usage
 
 To install this integration in a standalone app, add the gem to your `Gemfile`:
 
@@ -25,25 +35,52 @@ gem "linkedin_orbit"
 
 Then, run `bundle install` from your terminal.
 
-### With GitHub Actions
+You can instantiate a client by either passing in the required credentials during instantiation or by providing them in your `.env` file.
 
-This integration can be run as a daily scheduled activity within GitHub Actions! To install this integration with your GitHub account, follow the instructions in the [Orbit GitHub Actions Guide](https://github.com/orbit-love/github-actions-templates).
-## Usage
+### Instantiation with credentials:
 
-### CLI
+```ruby
+client = LinkedinOrbit::Client.new(
+    orbit_api_key: YOUR_API_KEY,
+    orbit_workspace_id: YOUR_ORBIT_WORKSPACE_ID,
+    linkedin_code: YOUR_LINKEDIN_BROWSER_REFRESH_CODE,
+    linkedin_organization: YOUR_LINKEDIN_ORGANIZATION_ID
+)
+```
 
-### Standalone Client
+### Instantiation with credentials in dotenv file:
 
-### GitHub Actions
+```ruby
+client = LinkedinOrbit::Client.new
+```
 
+### Fetching LinkedIn Comments
+
+Once, you have an instantiated client, you can fetch LinkedIn comments on your organization's posts and send them to Orbit by invoking the `#comments` instance method:
+
+```ruby
+client.comments
+```
+## CLI Usage
+
+You can also use this package with the included CLI. To use the CLI pass in the required environment variables on the command line before invoking the CLI:
+
+```bash
+$ ORBIT_API_KEY=... ORBIT_WORKSPACE_ID=... LINKEDIN_CODE=... LINKEDIN_ORGANIZATION=... bundle exec linkedin_orbit --check_comments
+```
+## GitHub Actions Automation Setup
+
+⚡ You can set up this integration in a matter of minutes using our GitHub Actions template. It will run regularly to add new activities to your Orbit workspace. All you need is a GitHub account.
+
+[See our guide for setting up this automation](https://github.com/orbit-love/github-actions-templates/blob/main/LinkedIn/README.md).
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/orbit-love/community-ruby-linkedin-orbit. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/orbit-love/community-ruby-linkedin-orbit/blob/main/CODE_OF_CONDUCT.md).
+We 💜 contributions from everyone! Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) for more information.
 
 ## License
 
-This is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+This is available as open source under the terms of the [MIT License](LICENSE).
 
 ## Code of Conduct
 
-Everyone interacting in the project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/orbit-live/community-ruby-linkedin-orbit/blob/main/CODE_OF_CONDUCT.md).
+This project uses the [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). We ask everyone to please adhere by its guidelines.
