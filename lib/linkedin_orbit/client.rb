@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "linkedin"
-require "dotenv/load"
 
 # Create a client to log LinkedIn interactions in your Orbit workspace
 # Credentials can either be passed in to the instance or be loaded
