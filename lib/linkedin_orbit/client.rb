@@ -16,13 +16,9 @@ require "dotenv/load"
 # @option params [String] :orbit_workspace
 #   The workspace ID for the Orbit workspace
 #
-# @option params [String] :linkedin_client_id
-#   The Client ID for your LinkedIn Developers Access
-#   More details on obtaining it at https://www.linkedin.com/developers/
-#
-# @option params [String] :linkedin_client_secret
-#   The Client Secret for your LinkedIn Developers Access
-#   More details on obtaining it at https://www.linkedin.com/developers/
+# @option params [String] :linkedin_code
+#   The browser refresh token obtained after authenticating with LinkedIn
+#   Required if value not provided for LINKEDIN_TOKEN environment variable
 #
 # @option params [String] :linkedin_organization
 #   The LinkedIn schema for the LinkedIn organization to log interactions from
@@ -43,6 +39,7 @@ module LinkedinOrbit
     def initialize(params = {})
       @orbit_api_key = params.fetch(:orbit_api_key, ENV["ORBIT_API_KEY"])
       @orbit_workspace = params.fetch(:orbit_workspace, ENV["ORBIT_WORKSPACE_ID"])
+      @linkedin_code = params[:linkedin_code] || ENV['LINKEDIN_CODE'] || nil
       @linkedin_token = token
       @linkedin_organization = params.fetch(:linkedin_organization, ENV["LINKEDIN_ORGANIZATION"])
     end
