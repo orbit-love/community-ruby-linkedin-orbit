@@ -25,6 +25,7 @@ module LinkedinOrbit
         request["Accept"] = "application/json"
         request["Content-Type"] = "application/json"
         request["Authorization"] = "Bearer #{@orbit_api_key}"
+        request["User-Agent"] = "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}"
 
         request.body = construct_body.to_json
 
