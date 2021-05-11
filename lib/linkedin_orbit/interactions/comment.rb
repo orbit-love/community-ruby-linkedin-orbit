@@ -37,6 +37,7 @@ module LinkedinOrbit
         {
           activity: {
             activity_type: "linkedin:comment",
+            tags: ["channel:linkedin"],
             title: "Commented on LinkedIn Post",
             description: construct_description,
             occurred_at: Time.at(@comment["created"]["time"] / 1000).utc,
