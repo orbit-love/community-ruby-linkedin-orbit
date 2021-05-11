@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    linkedin_orbit (0.0.1)
+    linkedin_orbit (0.0.2)
+      dotenv (~> 2.7)
       http (~> 4.4)
       json (~> 2.5)
       linkedin (~> 1.1)
@@ -20,6 +21,7 @@ GEM
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
     faraday (1.4.1)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)

@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "zeitwerk", "~> 2.4"
   spec.add_dependency "thor", "~> 1.1"
   spec.add_dependency "linkedin", "~> 1.1"
+  spec.add_dependency "dotenv", "~> 2.7"
   spec.add_development_dependency "rspec", "~> 3.4"
   spec.add_development_dependency "webmock", "~> 3.12"
 end

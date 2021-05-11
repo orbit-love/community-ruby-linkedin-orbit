@@ -47,7 +47,7 @@ module LinkedinOrbit
       response = https.request(request)
 
       response = JSON.parse(response.body)
-
+      
       response["elements"].each do |element|
         posts << {
           "id" => element["activity"],

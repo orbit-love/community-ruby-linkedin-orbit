@@ -41,6 +41,7 @@ module LinkedinOrbit
             description: construct_description,
             occurred_at: Time.at(@comment["created"]["time"] / 1000).utc,
             key: @comment["id"],
+            link: "https://www.linkedin.com/feed/update/#{@comment["object"]}",
             member: {
               name: name
             }

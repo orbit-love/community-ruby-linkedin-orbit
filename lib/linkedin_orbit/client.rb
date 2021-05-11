@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "linkedin"
+require "dotenv/load"
+require "net/http"
+require "json"
 
 # Create a client to log LinkedIn interactions in your Orbit workspace
 # Credentials can either be passed in to the instance or be loaded
@@ -15,8 +18,8 @@ require "linkedin"
 # @option params [String] :orbit_workspace
 #   The workspace ID for the Orbit workspace
 #
-# @option params [String] :linkedin_code
-#   The browser refresh token obtained after authenticating with LinkedIn
+# @option params [String] :linkedin_token
+#   The token obtained after authenticating with LinkedIn
 #   Required if value not provided for LINKEDIN_TOKEN environment variable
 #
 # @option params [String] :linkedin_organization
@@ -38,18 +41,12 @@ module LinkedinOrbit
     def initialize(params = {})
       @orbit_api_key = params.fetch(:orbit_api_key, ENV["ORBIT_API_KEY"])
       @orbit_workspace = params.fetch(:orbit_workspace, ENV["ORBIT_WORKSPACE_ID"])
-      @linkedin_code = params[:linkedin_code] || ENV['LINKEDIN_CODE'] || nil
       @linkedin_token = token
       @linkedin_organization = params.fetch(:linkedin_organization, ENV["LINKEDIN_ORGANIZATION"])
     end
 
     def token
-      @token ||= begin
-        return ENV["LINKEDIN_TOKEN"] if ENV["LINKEDIN_TOKEN"]
-
-        linkedin = LinkedIn::Client.new(@linkedin_client_id, @linkedin_client_secret)
-        linkedin.authorize_from_access(ENV["LINKEDIN_CODE"])
-      end
+      @token ||= ENV["LINKEDIN_TOKEN"]
     end
 
     def comments
