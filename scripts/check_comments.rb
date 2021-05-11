@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "dev_orbit"
+require "linkedin_orbit"
 require "thor"
 
 module LinkedinOrbit
