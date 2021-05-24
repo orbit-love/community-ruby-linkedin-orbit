@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "json"
 
 module LinkedinOrbit
@@ -16,22 +15,13 @@ module LinkedinOrbit
       end
 
       def after_initialize!
-        url = URI("https://app.orbit.love/api/v1/#{@orbit_workspace}/activities")
-
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
-
-        request = Net::HTTP::Post.new(url)
-        request["Accept"] = "application/json"
-        request["Content-Type"] = "application/json"
-        request["Authorization"] = "Bearer #{@orbit_api_key}"
-        request["User-Agent"] = "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}"
-
-        request.body = construct_body.to_json
-
-        response = http.request(request)
-
-        JSON.parse(response.body)
+        OrbitActivities::Request.new(
+          api_key: @orbit_api_key,
+          workspace_id: @orbit_workspace,
+          user_agent: "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}",
+          action: "new_activity",
+          body: construct_body.to_json
+        )
       end
 
       def construct_body
