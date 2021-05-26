@@ -4,7 +4,9 @@
 [![Gem Version](https://badge.fury.io/rb/linkedin_orbit.svg)](https://badge.fury.io/rb/dev_orbit)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
 
-This is a Ruby app that can be used to integrate LinkedIn post comments into your organization's Orbit workspace.
+Add your LinkedIn interactions into your Orbit workspace with this community-built integration.
+
+![New LinkedIn post comment in Orbit screenshot](readme_images/new-comment-screenshot.png)
 
 |<p align="left">:sparkles:</p> This is a *community project*. The Orbit team does its best to maintain it and keep it up to date with any recent API changes.<br/><br/>We welcome community contributions to make sure that it stays current. <p align="right">:sparkles:</p>|
 |-----------------------------------------|
