@@ -12,6 +12,8 @@ module LinkedinOrbit
     def process_comments
       posts = get_posts
 
+      return posts unless posts.is_a?(Array)
+
       posts.each do |post|
         comments = get_post_comments(post["id"])
 
@@ -47,7 +49,16 @@ module LinkedinOrbit
       response = https.request(request)
 
       response = JSON.parse(response.body)
-      
+
+      return response["message"] if response["serviceErrorCode"]
+
+      if response["elements"].nil? || response["elements"].empty?
+        return <<~HEREDOC
+          No new posts to process from your LinkedIn organization.
+          If you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.
+        HEREDOC
+      end
+
       response["elements"].each do |element|
         posts << {
           "id" => element["activity"],
