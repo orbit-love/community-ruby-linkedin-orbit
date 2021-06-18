@@ -23,7 +23,7 @@ The application requires the following environment variables:
 | Variable | Description | More Info
 |---|---|--|
 | `LINKEDIN_TOKEN` | LinkedIn Token | Follow the [First Time Setup guide](docs/FIRST_TIME_INSTRUCTIONS.md) to obtain the token
-| `LINKEDIN_ORGANIZATION` | LinkedIn Organization Page ID | Format: `urn:li:organization:#{id}`. ID is the set of numbers in LinkedIn page URL, i.e. `https://www.linkedin.com/company/28866695`, the ID is `28866695`.
+| `LINKEDIN_ORGANIZATION` | LinkedIn Organization Page ID | Format: `urn:li:organization:#{id}`, where `id` is the set of numbers in the LinkedIn page URL, i.e. `https://www.linkedin.com/company/28866695`, the `id` is `28866695`.
 | `ORBIT_API_KEY` | API key for Orbit | Found in `Account Settings` in your Orbit workspace
 | `ORBIT_WORKSPACE_ID` | ID for your Orbit workspace | Last part of the Orbit workspace URL, i.e. `https://app.orbit.love/my-workspace`, the ID is `my-workspace`
 
@@ -57,6 +57,8 @@ client = LinkedinOrbit::Client.new
 ```
 
 ### Fetching LinkedIn Comments
+
+**The API token owner must be an admin on the LinkedIn organization's page in order to fetch comments. Please ask the manager of your LinkedIn page to grant admin status to your account before attempting to fetch comments.**
 
 Once, you have an instantiated client, you can fetch LinkedIn comments on your organization's posts and send them to Orbit by invoking the `#comments` instance method:
 
