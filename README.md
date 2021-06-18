@@ -58,6 +58,8 @@ client = LinkedinOrbit::Client.new
 
 ### Fetching LinkedIn Comments
 
+**The API token owner must be an admin on the LinkedIn organization's page in order to fetch comments. Please ask the manager of your LinkedIn page to grant admin status to your account before attempting to fetch comments.**
+
 Once, you have an instantiated client, you can fetch LinkedIn comments on your organization's posts and send them to Orbit by invoking the `#comments` instance method:
 
 ```ruby
