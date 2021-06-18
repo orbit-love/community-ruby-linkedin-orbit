@@ -47,6 +47,8 @@ After you have finished all of the above steps, you are ready to move on to the 
 
 ## LinkedIn Token
 
+**Do not proceed to this step until you have received approval from LinkedIn for your API access request. This next step will not work until that has happened.**
+
 LinkedIn uses OAuth 2.0 as its authentication format, and as such, you need to authenticate *one time every two months* to obtain a token that will be used for the integration from then on. 
 
 The `linkedin_orbit` integration includes an authentication application to facilitate this process for you. It requires that you have a [Heroku](https://www.heroku.com/) account. It is free to set up a Heroku account, and the one-time authentication app, is fine to run inside the free tier of the platform.
