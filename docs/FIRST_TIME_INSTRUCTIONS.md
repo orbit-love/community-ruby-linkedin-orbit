@@ -1,8 +1,17 @@
 # Instructions for First Time Set Up
 
-These instructions will walk you through authenticating to LinkedIn, and receiving your LinkedIn token, which is needed to use this integration. You will only need to do this once every two months.
+|These instructions will walk you through authenticating to LinkedIn, and receiving your LinkedIn token, which is needed to use this integration. You will only need to do this once every two months.|
+|-----------------------------------------|
 
-## Creating a LinkedIn Developers App
+![Setup Flow for LinkedIn](../readme_images/linkedin-flow.png)
+
+## 1. Before You Start
+
+LinkedIn requires that the personal account (your LinkedIn account) requesting API access for an organization or company on LinkedIn be an admin of the organization or company's LinkedIn page. 
+
+Please verify that you have administrative privileges for the organization LinkedIn page. If you do not, your organization's administrator can grant your account the correct access level. 
+## 2. LinkedIn Setup
+### Creating a LinkedIn Developers App
 
 The first thing you must do is create a LinkedIn Developers app.
 
@@ -21,7 +30,7 @@ Once you submit the form, it usually takes 3-4 days for LinkedIn to confirm the 
 
 While you wait for verification, you can do the next step, which is to request the right API scope from LinkedIn.
 
-## Requesting the LinkedIn Marketing Developer Platform API Access
+### Requesting the LinkedIn Marketing Developer Platform API Access
 
 LinkedIn has many different types of APIs and many different types of access levels to those APIs. The API your app needs access to is the **Marketing Developer Platform**.
 
@@ -33,7 +42,17 @@ This will take another few days for LinkedIn to verify and confirm this request.
 
 ![LinkedIn Developer Products List](../readme_images/products_list.png)
 
-## LinkedIn API Credentials
+## 3. Wait for LinkedIn
+
+At this point, you need to wait for LinkedIn to approve both your new developer application, and access to the Marketing Developer Platform API. This generally takes several days. LinkedIn will both email you with an update, and post an update inside the [LinkedIn Developers](https://www.linkedin.com/developers) page. 
+
+If your request is denied access, you can submit an appeal to LinkedIn. The appeal process can take several days again. Pay close attention to the specified reason LinkedIn provided for the initial rejection, and work to remedy it before submitting an appeal.
+
+The Orbit Developer Relations team unfortunately cannot assist or address LinkedIn API approval processes.
+
+## 4. Integration Setup
+
+### LinkedIn API Credentials
 
 You will need your LinkedIn API credentials to move forward. You can copy your LinkedIn credentials, which are your Client ID and Client Secret from the "Auth" section in the LinkedIn Developers dashboard.
 
@@ -45,7 +64,7 @@ You will also see on the "Auth" page a section called "OAuth 2.0 Settings". We w
 
 After you have finished all of the above steps, you are ready to move on to the last step in this first time setup instructions.
 
-## LinkedIn Token
+### LinkedIn Token
 
 **Do not proceed to this step until you have received approval from LinkedIn for your API access request. This next step will not work until that has happened.**
 
@@ -75,14 +94,14 @@ Now, return back to your browser window with your Heroku app running. Click on t
 
 The last step you need to complete in this first time setup is to add the LinkedIn token you created into the LinkedIn Orbit community integration credentials, either in the context of a standalone app or in the context of running it as a GitHub Action.
 
-## Add the LinkedIn Token to the LinkedIn Orbit Community Integration
-### Within GitHub Actions
+### Add the LinkedIn Token to the LinkedIn Orbit Community Integration
+#### Within GitHub Actions
 
 *(This step assumes you have a GitHub repository created already to run the LinkedIn Orbit community integration. If you do not, please follow [this guide](https://docs.github.com/en/github/getting-started-with-github/create-a-repo) first.)*
 
 The LinkedIn token you created in the last step needs to be added to the GitHub repository that you are running the LinkedIn Orbit community integration from. To do so, follow the step-by-step guide in the [README](https://github.com/orbit-love/github-actions-templates/blob/main/README.md#adding-your-credentials-to-github) in the GitHub Actions instructions. The name for this secret **must** be: `LINKEDIN_TOKEN`.
 
-### Within a Standalone App
+#### Within a Standalone App
 
 If you are running the community integration as a standalone app, you can add the LinkedIn token as an environment variable inside the `.env` file in the root directory of the codebase.
 
@@ -91,6 +110,6 @@ Open up the `.env` file and add a new line starting with `LINKEDIN_TOKEN=` and a
 
 You have now successfully finished the setup for your LinkedIn Orbit community integration. This steps needs to occur once every 60 days.
 
-In between, you can safely delete the Heroku app you created and recreate a new one when you need to do this again.
+In between, you should delete the Heroku app you created and recreate a new one when you need to do this again as keeping it alive potentially exposes your LinkedIn token to those who may come across it.
 
 From within the Heroku dashboard, navigate to the "Settings" for the app and at the very bottom of the page is a button called "Delete app". Once you click on that button, Heroku will confirm you wish to delete the app. Upon confirmation, the app will be deleted and the deployment on the web will be removed.
