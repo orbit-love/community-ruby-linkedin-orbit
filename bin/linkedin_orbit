@@ -2,6 +2,7 @@
 require 'optparse'
 
 check_comments = false
+historical_import = false
 
 options = {}
 choices = OptionParser.new do |opts|
@@ -13,6 +14,9 @@ choices = OptionParser.new do |opts|
   opts.on("--check-comments", "Check for new LinkedIn comments") do
     check_comments = true
   end
+  opts.on("--historical-import", "Performa historical import of all LinkedIn interactions") do
+    historical_import = true
+  end
 end.parse!
 
 $LOAD_PATH.unshift(File.expand_path('../lib/dev_orbit', __dir__))
@@ -23,5 +27,6 @@ require_relative '../scripts/check_comments'
 if check_comments
   puts "Checking for new LinkedIn comments and posting them to your Orbit workspace..."
   ARGV[0] = 'render'
+  ARGV[1] = historical_import
   LinkedinOrbit::Scripts::CheckComments.start(ARGV)
 end

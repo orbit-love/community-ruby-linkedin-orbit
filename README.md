@@ -56,6 +56,16 @@ client = LinkedinOrbit::Client.new(
 client = LinkedinOrbit::Client.new
 ```
 
+### Performing a Historical Import
+
+You may want to perform a one-time historical import to fetch all your previous LinkedIn interactions and bring them into your Orbit workspace. To do so, instantiate your `client` with the `historical_import` flag:
+
+```ruby
+client = LinkedinOrbit::Client.new(
+  historical_import: true
+)
+```
+
 ### Fetching LinkedIn Comments
 
 **The API token owner must be an admin on the LinkedIn organization's page in order to fetch comments. Please ask the manager of your LinkedIn page to grant admin status to your account before attempting to fetch comments.**
@@ -72,6 +82,8 @@ You can also use this package with the included CLI. To use the CLI pass in the 
 ```bash
 $ ORBIT_API_KEY=... ORBIT_WORKSPACE_ID=... LINKEDIN_TOKEN=... LINKEDIN_ORGANIZATION=... bundle exec linkedin_orbit --check_comments
 ```
+
+**Add the `--historical-import` flag to your CLI command to perform a historical import of all your LinkedIn interactions using the CLI.**
 ## GitHub Actions Automation Setup
 
 ⚡ You can set up this integration in a matter of minutes using our GitHub Actions template. It will run regularly to add new activities to your Orbit workspace. All you need is a GitHub account.

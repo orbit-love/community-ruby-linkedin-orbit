@@ -29,13 +29,18 @@ require "json"
 #   The LinkedIn organization would use the last component of that web address and would be:
 #   urn:li:organization:28866695
 #
+# @option params [Boolean] :historical_import
+#   Whether to do an import of all LinkedIn interactions ignoring latest
+#   activity already in the Orbit workspace.
+#   Default is false.
+#
 # @param [Hash] params
 #
 # @return [DevOrbit::Client]
 #
 module LinkedinOrbit
   class Client
-    attr_accessor :orbit_api_key, :orbit_workspace, :linkedin_organization
+    attr_accessor :orbit_api_key, :orbit_workspace, :linkedin_organization, :historical_import
     attr_reader :linkedin_token
 
     def initialize(params = {})
@@ -43,6 +48,7 @@ module LinkedinOrbit
       @orbit_workspace = params.fetch(:orbit_workspace, ENV["ORBIT_WORKSPACE_ID"])
       @linkedin_token = token
       @linkedin_organization = params.fetch(:linkedin_organization, ENV["LINKEDIN_ORGANIZATION"])
+      @historical_import = params.fetch(:historical_import, false)
     end
 
     def token
@@ -54,7 +60,8 @@ module LinkedinOrbit
         linkedin_token: @linkedin_token,
         linkedin_organization: @linkedin_organization,
         orbit_api_key: @orbit_api_key,
-        orbit_workspace: @orbit_workspace
+        orbit_workspace: @orbit_workspace,
+        historical_import: @historical_import
       ).process_comments
     end
   end

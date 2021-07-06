@@ -8,8 +8,8 @@ module LinkedinOrbit
   module Scripts
     class CheckComments < Thor
       desc "render", "check for new LinkedIn post comments and push them to Orbit"
-      def render
-        client = LinkedinOrbit::Client.new
+      def render(*params)
+        client = LinkedinOrbit::Client.new(historical_import: params[0])
         client.comments
       end
     end
