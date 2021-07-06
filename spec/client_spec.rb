@@ -16,6 +16,22 @@ RSpec.describe LinkedinOrbit::Client do
     expect(subject).to be_truthy
   end
 
+  it "defaults to false for historical import" do
+    expect(subject.historical_import).to eq(false)
+  end
+
+  it "allows historical import to be defined during initialization" do
+    client = LinkedinOrbit::Client.new(
+      orbit_api_key: "12345",
+      orbit_workspace: "test",
+      linkedin_organization: "urn:li:organization:123456789",
+      linkedin_code: "QA123456789",
+      historical_import: true
+    )
+
+    expect(client.historical_import).to eq(true)
+  end
+
   it "initializes with credentials from environment variables" do
     allow(ENV).to receive(:[]).with("ORBIT_API_KEY").and_return("12345")
     allow(ENV).to receive(:[]).with("ORBIT_WORKSPACE").and_return("test")

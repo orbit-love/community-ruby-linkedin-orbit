@@ -7,6 +7,7 @@ module LinkedinOrbit
       @linkedin_token = params.fetch(:linkedin_token)
       @orbit_api_key = params.fetch(:orbit_api_key)
       @orbit_workspace = params.fetch(:orbit_workspace)
+      @historical_import = params.fetch(:historical_import, false)
     end
 
     def process_comments
@@ -14,7 +15,11 @@ module LinkedinOrbit
 
       return posts unless posts.is_a?(Array)
 
+      orbit_timestamp = last_orbit_activity_timestamp
+      
       posts.each do |post|
+        times = 0
+
         comments = get_post_comments(post["id"])
 
         comments.reject! { |comment| comment["actor~"]["id"] == "private" }
@@ -22,6 +27,16 @@ module LinkedinOrbit
         next if comments.nil? || comments.empty?
 
         comments.each do |comment|
+          unless @historical_import && orbit_timestamp
+            next if Time.at(comment["created"]["time"] / 1000).utc.to_s < orbit_timestamp unless orbit_timestamp.nil?
+          end
+
+          if orbit_timestamp && @historical_import == false
+            next if Time.at(comment["created"]["time"] / 1000).utc.to_s < orbit_timestamp
+          end
+
+          times += 1
+
           LinkedinOrbit::Orbit.call(
             type: "comments",
             data: {
@@ -32,6 +47,11 @@ module LinkedinOrbit
             orbit_api_key: @orbit_api_key
           )
         end
+
+        output = "Sent #{times} new comments to your Orbit workspace"
+
+        puts output
+        return output
       end
     end
 
@@ -84,6 +104,18 @@ module LinkedinOrbit
       response = JSON.parse(response.body)
 
       response["elements"]
+    end
+
+    def last_orbit_activity_timestamp
+      @last_orbit_activity_timestamp ||= begin
+        OrbitActivities::Request.new(
+          api_key: @orbit_api_key,
+          workspace_id: @orbit_workspace,
+          user_agent: "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}",
+          action: "latest_activity_timestamp",
+          filters: { activity_type: "custom:linkedin:comment" }
+        ).response
+      end
     end
   end
 end
