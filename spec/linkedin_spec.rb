@@ -232,7 +232,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
   describe "#get_posts" do
     context "with no posts to process" do
       it "returns a string message" do
-        stub_request(:get, "https://api.linkedin.com/v2/shares?owners=org&q=owners")
+        stub_request(:get, "https://api.linkedin.com/v2/shares?count=100&owners=org&q=owners&start=0")
           .with(
             headers: {
               "Accept" => "application/json",
@@ -248,7 +248,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
     context "with posts to process" do
       it "returns them in the right formatting at the end of the method" do
-        stub_request(:get, "https://api.linkedin.com/v2/shares?owners=org&q=owners")
+        stub_request(:get, "https://api.linkedin.com/v2/shares?count=100&owners=org&q=owners&start=0")
           .with(
             headers: {
               "Accept" => "application/json",
