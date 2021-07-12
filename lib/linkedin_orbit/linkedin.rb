@@ -57,33 +57,44 @@ module LinkedinOrbit
 
     def get_posts
       posts = []
-      url = URI("https://api.linkedin.com/v2/shares?q=owners&owners=#{@linkedin_organization}")
-      https = Net::HTTP.new(url.host, url.port)
-      https.use_ssl = true
+      page = 0
+      count = 100
+      looped_at_least_once = false
 
-      request = Net::HTTP::Get.new(url)
-      request["Accept"] = "application/json"
-      request["Content-Type"] = "application/json"
-      request["Authorization"] = "Bearer #{@linkedin_token}"
+      while page >= 0
+        url = URI("https://api.linkedin.com/v2/shares?q=owners&owners=#{@linkedin_organization}&start=#{page}&count=#{count}")
+        https = Net::HTTP.new(url.host, url.port)
+        https.use_ssl = true
 
-      response = https.request(request)
+        request = Net::HTTP::Get.new(url)
+        request["Accept"] = "application/json"
+        request["Content-Type"] = "application/json"
+        request["Authorization"] = "Bearer #{@linkedin_token}"
 
-      response = JSON.parse(response.body)
+        response = https.request(request)
 
-      return response["message"] if response["serviceErrorCode"]
+        response = JSON.parse(response.body)
 
-      if response["elements"].nil? || response["elements"].empty?
-        return <<~HEREDOC
-          No new posts to process from your LinkedIn organization.
-          If you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.
-        HEREDOC
-      end
+        return response["message"] if response["serviceErrorCode"]
 
-      response["elements"].each do |element|
-        posts << {
-          "id" => element["activity"],
-          "message_highlight" => element["text"]["text"][0, 40]
-        }
+        if response["elements"].nil? || response["elements"].empty?
+          return <<~HEREDOC
+            No new posts to process from your LinkedIn organization.
+            If you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.
+          HEREDOC
+        end
+
+        response["elements"].each do |element|
+          posts << {
+            "id" => element["activity"],
+            "message_highlight" => element["text"]["text"][0, 40]
+          }
+        end
+
+        break if response["elements"].count < count
+
+        looped_at_least_once = true
+        page += 1 if looped_at_least_once
       end
 
       posts
