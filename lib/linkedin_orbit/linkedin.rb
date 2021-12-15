@@ -49,7 +49,10 @@ module LinkedinOrbit
         end
       end
       
-      puts "Sent #{times} new comments to your Orbit workspace"
+      output = "Sent #{times} new comments to your Orbit workspace"
+
+      puts output
+      return output
     end
 
     def get_posts
