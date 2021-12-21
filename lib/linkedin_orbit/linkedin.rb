@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require "byebug"
 module LinkedinOrbit
   class Linkedin
     def initialize(params = {})
@@ -24,7 +24,20 @@ module LinkedinOrbit
 
         next if comments.nil? || comments.empty?
 
-        comments.reject! { |comment| comment["actor~"]["id"] == "private" }
+        # Indicates that the member does not want their information shared
+        # Member viewing access if forbidden for profile memberId
+        comments.reject! do |comment| 
+          if comment.has_key? "actor!"
+              true if comment["actor!"]["status"] == 403
+          end
+        end
+
+        # Indicates that the member does not want their information shared
+        comments.reject! do |comment|
+          if comment.has_key? "actor~"
+            true if comment["actor~"]["id"] == "private"
+          end
+        end
 
         comments.each do |comment|
           unless @historical_import && orbit_timestamp
