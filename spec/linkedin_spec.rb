@@ -71,7 +71,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
       it "posts the newer items to the Orbit workspace from LinkedIn" do
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -86,7 +86,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -163,7 +163,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -178,7 +178,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
         
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -193,7 +193,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -208,7 +208,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
