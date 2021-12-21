@@ -5,7 +5,7 @@ require_relative "lib/linkedin_orbit/version"
 Gem::Specification.new do |spec|
   spec.name = "linkedin_orbit"
   spec.version                = LinkedinOrbit::VERSION
-  spec.authors                = ["Orbit DevRel", "Ben Greenberg"]
+  spec.authors                = ["Orbit DevRel", "Ben Greenberg", "Colin Loretz"]
   spec.email                  = ["devrel@orbit.love"]
 
   spec.summary                = "Integrate LinkedIn interactions into Orbit"

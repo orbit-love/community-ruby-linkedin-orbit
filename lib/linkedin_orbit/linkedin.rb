@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require "byebug"
 module LinkedinOrbit
   class Linkedin
     def initialize(params = {})
@@ -16,15 +16,28 @@ module LinkedinOrbit
       return posts unless posts.is_a?(Array)
 
       orbit_timestamp = last_orbit_activity_timestamp
-      
-      posts.each do |post|
-        times = 0
 
+      times = 0
+      posts.each do |post|
+    
         comments = get_post_comments(post["id"])
 
-        comments.reject! { |comment| comment["actor~"]["id"] == "private" }
-
         next if comments.nil? || comments.empty?
+
+        # Indicates that the member does not want their information shared
+        # Member viewing access if forbidden for profile memberId
+        comments.reject! do |comment| 
+          if comment.has_key? "actor!"
+              true if comment["actor!"]["status"] == 403
+          end
+        end
+
+        # Indicates that the member does not want their information shared
+        comments.reject! do |comment|
+          if comment.has_key? "actor~"
+            true if comment["actor~"]["id"] == "private"
+          end
+        end
 
         comments.each do |comment|
           unless @historical_import && orbit_timestamp
@@ -47,33 +60,36 @@ module LinkedinOrbit
             orbit_api_key: @orbit_api_key
           )
         end
-
-        output = "Sent #{times} new comments to your Orbit workspace"
-
-        puts output
-        return output
       end
+      
+      output = "Sent #{times} new comments to your Orbit workspace"
+
+      puts output
+      return output
     end
 
     def get_posts
       posts = []
       page = 0
       count = 100
-      looped_at_least_once = false
+      total = 0
 
-      while page >= 0
-        url = URI("https://api.linkedin.com/v2/shares?q=owners&owners=#{@linkedin_organization}&start=#{page}&count=#{count}")
+      while page * count <= total
+        url = URI("https://api.linkedin.com/v2/ugcPosts?q=authors&authors=List(#{CGI.escape(@linkedin_organization)})&sortBy=LAST_MODIFIED&start=#{page*count}&count=#{count}")
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = true
 
         request = Net::HTTP::Get.new(url)
         request["Accept"] = "application/json"
+        request["X-Restli-Protocol-Version"] = "2.0.0"
         request["Content-Type"] = "application/json"
         request["Authorization"] = "Bearer #{@linkedin_token}"
 
         response = https.request(request)
 
         response = JSON.parse(response.body)
+
+        total = response["paging"]["total"] if page == 0
 
         return response["message"] if response["serviceErrorCode"]
 
@@ -85,16 +101,13 @@ module LinkedinOrbit
         end
 
         response["elements"].each do |element|
+          next if element["id"].nil?
           posts << {
-            "id" => element["activity"],
-            "message_highlight" => element["text"]["text"][0, 40]
+            "id" => element["id"],
+            "message_highlight" => element["specificContent"]["com.linkedin.ugc.ShareContent"]["shareCommentary"]["text"][0, 40]
           }
         end
-
-        break if response["elements"].count < count
-
-        looped_at_least_once = true
-        page += 1 if looped_at_least_once
+        page += 1
       end
 
       posts

@@ -71,7 +71,22 @@ RSpec.describe LinkedinOrbit::Linkedin do
       it "posts the newer items to the Orbit workspace from LinkedIn" do
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            headers: {
+              "Accept" => "application/json",
+              "Authorization" => "Bearer 12345",
+              "Content-Type" => "application/json",
+              "User-Agent" => "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}"
+            }
+          ).to_return(status: 200, body: {
+            response: {
+              code: "SUCCESS"
+            }
+          }.to_json.to_s, headers: {})
+
+        stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
+          .with(
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -148,7 +163,22 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            headers: {
+              "Accept" => "application/json",
+              "Authorization" => "Bearer 12345",
+              "Content-Type" => "application/json",
+              "User-Agent" => "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}"
+            }
+          ).to_return(status: 200, body: {
+            response: {
+              code: "SUCCESS"
+            }
+          }.to_json.to_s, headers: {})
+        
+        stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
+          .with(
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -163,7 +193,22 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"A highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some text\\\"\\n\",\"occurred_at\":\"2021-06-28 16:43:34 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
+            headers: {
+              "Accept" => "application/json",
+              "Authorization" => "Bearer 12345",
+              "Content-Type" => "application/json",
+              "User-Agent" => "community-ruby-linkedin-orbit/#{LinkedinOrbit::VERSION}"
+            }
+          ).to_return(status: 200, body: {
+            response: {
+              code: "SUCCESS"
+            }
+          }.to_json.to_s, headers: {})
+
+        stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
+          .with(
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Another highlight...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Some more text\\\"\\n\",\"occurred_at\":\"2021-06-17 02:56:54 UTC\",\"key\":\"456789\",\"link\":\"https://www.linkedin.com/feed/update/\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\" \"}},\"identity\":{\"source\":\"linkedin\",\"name\":\" \",\"uid\":null}}",
             headers: {
               "Accept" => "application/json",
               "Authorization" => "Bearer 12345",
@@ -224,7 +269,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
         allow(client).to receive(:get_posts).and_return(posts_stub)
         allow(client).to receive(:get_post_comments).and_return(comments_stub)
 
-        expect(client.process_comments).to eql("Sent 2 new comments to your Orbit workspace")
+        expect(client.process_comments).to eql("Sent 4 new comments to your Orbit workspace")
       end
     end
   end
@@ -232,15 +277,19 @@ RSpec.describe LinkedinOrbit::Linkedin do
   describe "#get_posts" do
     context "with no posts to process" do
       it "returns a string message" do
-        stub_request(:get, "https://api.linkedin.com/v2/shares?count=100&owners=org&q=owners&start=0")
+        stub_request(:get, "https://api.linkedin.com/v2/ugcPosts?authors=List(org)&count=100&q=authors&sortBy=LAST_MODIFIED&start=0")
           .with(
             headers: {
-              "Accept" => "application/json",
-              "Authorization" => "Bearer abc123",
-              "Content-Type" => "application/json"
+              'Accept'=>'application/json',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Authorization'=>'Bearer abc123',
+              'Content-Type'=>'application/json',
+              'Host'=>'api.linkedin.com',
+              'User-Agent'=>'Ruby',
+              'X-Restli-Protocol-Version'=>'2.0.0'
             }
           )
-          .to_return(status: 200, body: "{\"elements\": []}", headers: {})
+          .to_return(status: 200, body: "{\"paging\":{\"start\":0,\"count\":100,\"links\":[{\"type\":\"application/json\",\"rel\":\"prev\",\"href\":\"/v2/ugcPosts?q=authors&start=0&count=100&sortBy=LAST_MODIFIED&authors=List(org)\"}],\"total\":0},\"elements\": []}", headers: {})
 
         expect(subject.get_posts).to eql("No new posts to process from your LinkedIn organization.\nIf you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.\n")
       end
@@ -248,15 +297,19 @@ RSpec.describe LinkedinOrbit::Linkedin do
 
     context "with posts to process" do
       it "returns them in the right formatting at the end of the method" do
-        stub_request(:get, "https://api.linkedin.com/v2/shares?count=100&owners=org&q=owners&start=0")
+        stub_request(:get, "https://api.linkedin.com/v2/ugcPosts?authors=List(org)&count=100&q=authors&sortBy=LAST_MODIFIED&start=0")
           .with(
             headers: {
-              "Accept" => "application/json",
-              "Authorization" => "Bearer abc123",
-              "Content-Type" => "application/json"
+              'Accept'=>'application/json',
+              'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Authorization'=>'Bearer abc123',
+              'Content-Type'=>'application/json',
+              'Host'=>'api.linkedin.com',
+              'User-Agent'=>'Ruby',
+              'X-Restli-Protocol-Version'=>'2.0.0'
             }
           )
-          .to_return(status: 200, body: "{\"elements\": [{\"owner\": \"org\", \"activity\": \"activity-123\", \"text\": {\"text\": \"LinkedIn Post Body\"}}]}", headers: {})
+          .to_return(status: 200, body: "{\"paging\":{\"start\":0,\"count\":100,\"links\":[{\"type\":\"application/json\",\"rel\":\"prev\",\"href\":\"/v2/ugcPosts?q=authors&start=0&count=100&sortBy=LAST_MODIFIED&authors=List(org)\"}],\"total\":1},\"elements\": [{\"owner\": \"org\", \"id\": \"activity-123\", \"specificContent\": { \"com.linkedin.ugc.ShareContent\" : { \"shareCommentary\" : {\"text\": \"LinkedIn Post Body\"}}}}]}", headers: {})
 
         expect(subject.get_posts).to eql(
           [

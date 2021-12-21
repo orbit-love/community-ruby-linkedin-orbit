@@ -32,7 +32,7 @@ RSpec.describe LinkedinOrbit::Interactions::Comment do
         stub_request(:post, "https://app.orbit.love/api/v1/1234/activities")
           .with(
             headers: { 'Authorization' => "Bearer 12345", 'Content-Type' => 'application/json' },
-            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Sample Title...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Sample Text\\\"\\n\",\"occurred_at\":\"2016-03-02 23:00:00 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/urn:li:activity:6793941564394651648\",\"member\":{\"name\":\"John Smith\"}},\"identity\":{\"source\":\"linkedin\",\"name\":\"John Smith\",\"uid\":\"1234567\"}}"
+            body: "{\"activity\":{\"activity_type\":\"linkedin:comment\",\"tags\":[\"channel:linkedin\"],\"title\":\"Commented on LinkedIn Post\",\"description\":\"LinkedIn post: \\\"Sample Title...\\\"\\n\\n\\nComment:\\n\\n\\n\\\"Sample Text\\\"\\n\",\"occurred_at\":\"2016-03-02 23:00:00 UTC\",\"key\":\"12345\",\"link\":\"https://www.linkedin.com/feed/update/urn:li:activity:6793941564394651648\",\"link_text\":\"View on LinkedIn\",\"member\":{\"name\":\"John Smith\"}},\"identity\":{\"source\":\"linkedin\",\"name\":\"John Smith\",\"uid\":\"1234567\"}}"
           )
           .to_return(
             status: 200,

@@ -34,6 +34,7 @@ module LinkedinOrbit
             occurred_at: Time.at(@comment["created"]["time"] / 1000).utc,
             key: @comment["id"],
             link: "https://www.linkedin.com/feed/update/#{@comment["object"]}",
+            link_text: "View on LinkedIn",
             member: {
               name: name
             }
