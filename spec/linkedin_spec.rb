@@ -291,7 +291,7 @@ RSpec.describe LinkedinOrbit::Linkedin do
           )
           .to_return(status: 200, body: "{\"paging\":{\"start\":0,\"count\":100,\"links\":[{\"type\":\"application/json\",\"rel\":\"prev\",\"href\":\"/v2/ugcPosts?q=authors&start=0&count=100&sortBy=LAST_MODIFIED&authors=List(org)\"}],\"total\":0},\"elements\": []}", headers: {})
 
-        expect(subject.get_posts).to eql("No new posts to process from your LinkedIn organization.\nIf you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.\n")
+        expect(subject.get_posts).to eql([])
       end
     end
 
