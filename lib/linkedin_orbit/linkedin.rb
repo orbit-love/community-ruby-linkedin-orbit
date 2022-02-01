@@ -86,20 +86,28 @@ module LinkedinOrbit
 
         response = https.request(request)
 
-        response = JSON.parse(response.body)
+        if response.code == "401"
+          puts "⛔️ Your LinkedIn auth token is expired or invalid."
+          puts "✨ Great news! LinkedIn is going to be available as a Plug & Play integration in Orbit late February 2022."
+          puts "Keep an eye on Canny for updates: https://orbit.canny.io/integrations"
+          return []
+        end
 
-        total = response["paging"]["total"] if page == 0
+        parsed_response = JSON.parse(response.body)
 
-        return response["message"] if response["serviceErrorCode"]
+        total = parsed_response["paging"]["total"] if page == 0
 
-        if response["elements"].nil? || response["elements"].empty?
-          return <<~HEREDOC
+        return parsed_response["message"] if parsed_response["serviceErrorCode"]
+
+        if parsed_response["elements"].nil? || parsed_response["elements"].empty?
+          puts <<~HEREDOC
             No new posts to process from your LinkedIn organization.
             If you suspect this is incorrect, verify your LinkedIn organization schema is correct in your credentials.
           HEREDOC
+          return []
         end
 
-        response["elements"].each do |element|
+        parsed_response["elements"].each do |element|
           next if element["id"].nil?
           posts << {
             "id" => element["id"],
