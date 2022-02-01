@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    linkedin_orbit (0.5.1)
+    linkedin_orbit (0.5.2)
       dotenv (~> 2.7)
       http (~> 4.4)
       json (~> 2.5)
