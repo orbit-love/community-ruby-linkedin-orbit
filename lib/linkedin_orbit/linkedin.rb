@@ -88,6 +88,8 @@ module LinkedinOrbit
 
         if response.code == "401"
           puts "⛔️ Your LinkedIn auth token is expired or invalid."
+          puts "✨ Great news! LinkedIn is going to be available as a Plug & Play integration in Orbit late February 2022."
+          puts "Keep an eye on Canny for updates: https://orbit.canny.io/integrations"
           return []
         end
 
